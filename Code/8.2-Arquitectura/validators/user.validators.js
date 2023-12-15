@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const schema = Joi.object.keys({
+const schema = Joi.object({
   userName: Joi.string().min(3).max(30).required().messages({
     "string.base": `Username debe ser una cadena de caracteres`,
     "string.empty": `Username no debe estar vacio`,
@@ -11,7 +11,7 @@ const schema = Joi.object.keys({
     "string.email": `El campo email debe tener un formato valido`,
   }),
   phoneNumber: Joi.number().required(),
-  password: Joi.number().min(3).max(30).required().messages({
+  password: Joi.string().min(3).max(30).required().messages({
     "string.min": `El campo password debe tener un mínimo de {#limit} caracteres`
   }),
   service: Joi.string().required(),

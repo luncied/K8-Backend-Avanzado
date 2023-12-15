@@ -1,13 +1,13 @@
 const { response, request } = require('express');
 const User = require('../models/users.model');
-const { schema } = require('../validators/user.validators')
+// const { schema } = require('../validators/user.validators')
 
 async function userGet(req=request, res=response){
   try {
     const queryParam =  { state : true } 
     const { limit = 10 } = req.query // accedemos a los parametros del query y obtemenos el de nombre "limit"
     const numeroEntradas = await User.countDocuments()
-    const usuario = await User.find(queryParam).pupulate('service').limit(Number(limit)) // el find encontrara todos los registros con { state:true } // como limte pasamos el valor del query (?) // populate nos sirve para traer los datos de la conexión que tenemos con Service
+    const usuario = await User.find(queryParam).limit(Number(limit)).pupulate('service') // el find encontrara todos los registros con { state:true } // como limte pasamos el valor del query (?) // populate nos sirve para traer los datos de la conexión que tenemos con Service
     res.status(200).json({ 
       message:numeroEntradas,
       usuario
